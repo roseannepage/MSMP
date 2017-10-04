@@ -55,26 +55,24 @@ CREATE TABLE Location
 CONSTRAINT pk_location PRIMARY KEY (location_id));
 
 CREATE TABLE ActiveLocation
-( active_loc_id int NOT NULL AUTO_INCREMENT,
- location_id int NOT NULL,
+(location_id int NOT NULL,
  scribe_id int NOT NULL,
- PRIMARY KEY (active_loc_id),
+ PRIMARY KEY (location_id, scribe_id),
  FOREIGN KEY (scribe_id) REFERENCES Scribe(scribe_id),
  FOREIGN KEY (location_id) REFERENCES Location(location_id)
  );
 
 
 CREATE TABLE HistoryLocation
-( history_loc_id int NOT NULL AUTO_INCREMENT,
- location_id int NOT NULL,
+(location_id int NOT NULL,
  scribe_id int NOT NULL,
- PRIMARY KEY (history_loc_id),
+ PRIMARY KEY (location_id, scribe_id),
  FOREIGN KEY (scribe_id) REFERENCES Scribe(scribe_id),
  FOREIGN KEY (location_id) REFERENCES Location(location_id)
  );
  
  CREATE TABLE Physician
-( physician_id int NOT NULL AUTO_INCREMENT,
+(physician_id int NOT NULL AUTO_INCREMENT,
  physician_fname VARCHAR(20) NOT NULL,
  physician_lname VARCHAR(20) NOT NULL,
  physician_phone VARCHAR(20) NULL,
@@ -87,10 +85,9 @@ CREATE TABLE HistoryLocation
 CONSTRAINT pk_scribe PRIMARY KEY (physician_id));
 
 CREATE TABLE MdLocation
-( md_loc_id int NOT NULL AUTO_INCREMENT,
- location_id int NOT NULL,
+(location_id int NOT NULL,
  physician_id int NOT NULL,
- PRIMARY KEY (md_loc_id),
+ PRIMARY KEY (location_id, physician_id),
  FOREIGN KEY (physician_id) REFERENCES Physician(physician_id),
  FOREIGN KEY (location_id) REFERENCES Location(location_id)
  );
@@ -128,11 +125,10 @@ CREATE TABLE ScribeSpecializaiton # specialization specific clinical training
 );
 
 CREATE TABLE Preference
-( preference_id int NOT NULL AUTO_INCREMENT,
- physician_id int NOT NULL,
+(physician_id int NOT NULL,
  scribe_id int NOT NULL,
  preference Bit(1) NOT NULL, # 0 for avoidance, 1 for perference
- PRIMARY KEY (preference_id),
+ PRIMARY KEY (physician_id, scribe_id),
  FOREIGN KEY (scribe_id) REFERENCES Scribe(scribe_id),
  FOREIGN KEY (physician_id) REFERENCES Physician(physician_id)
  );
@@ -147,7 +143,8 @@ PRIMARY KEY(shift_id));
 
 CREATE TABLE ShiftSchedule
 (shift_schedule_id int NOT NULL AUTO_INCREMENT,
- physician_id INT NOT NULL AUTO_INCREMENT,
+ physician_id INT NOT NULL,
+ specialization_id INT NOT NULL,
  date_to_fill DATE NOT NULL,
  location_id INT NOT NULL,
  shift_id INT NOT NULL,
@@ -161,6 +158,7 @@ CREATE TABLE ShiftSchedule
  FOREIGN KEY (physician_id) REFERENCES Physician(physician_id),
  FOREIGN KEY (scribe_id) REFERENCES Scribe(scribe_id),
  FOREIGN KEY (location_id) REFERENCES Location(location_id),
+ FOREIGN KEY (specialization_id) REFERENCES Specialization(specialization_id),
  FOREIGN KEY (shift_id) REFERENCES Shift(shift_id)
  );
 
