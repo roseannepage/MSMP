@@ -61,7 +61,7 @@ public class ScribeFacadeREST extends AbstractFacade<Scribe> {
     public Scribe find(@PathParam("id") Integer id) {
         return super.find(id);
     }
-
+    
     @GET
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -87,5 +87,11 @@ public class ScribeFacadeREST extends AbstractFacade<Scribe> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
+
+    public List<Scribe> findQualifiedScribe() {
+        return em.createNamedQuery("Scribe.findByGeneralQualified" )
+                .setParameter("generalQualified", true)
+                .getResultList();    
+    }
 }

@@ -6,6 +6,7 @@
 package service;
 
 import entity.Location;
+import java.util.Arrays;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -87,5 +88,58 @@ public class LocationFacadeREST extends AbstractFacade<Location> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
+    public String[] getProvinces() {
+        Object[] objectArray = em.createNamedQuery("Location.findProvinces")
+                .getResultList().toArray();
+        if (objectArray.length != 0 && objectArray[0] != null) {
+            return Arrays.asList(objectArray).toArray(new String[objectArray.length]);
+        } else {
+            return null;
+        }
+    }
+
+    public String[] getCities(String province) {
+        Object[] objectArray = em.createNamedQuery("Location.findCities")
+                .setParameter("province", province)
+                .getResultList().toArray();
+        if (objectArray.length != 0 && objectArray[0] != null) {
+            return Arrays.asList(objectArray).toArray(new String[objectArray.length]);
+        } else {
+            return null;
+        }
+    }
+
+    public String[] getSites(String city) {
+        Object[] objectArray = em.createNamedQuery("Location.findSites")
+                .setParameter("city", city)
+                .getResultList().toArray();
+        if (objectArray.length != 0 && objectArray[0] != null) {
+            return Arrays.asList(objectArray).toArray(new String[objectArray.length]);
+        } else {
+            return null;
+        }
+    }
+
+    public String[] getDepartments(String site) {
+        Object[] objectArray = em.createNamedQuery("Location.findDepartments")
+                .setParameter("site", site)
+                .getResultList().toArray();
+        if (objectArray.length != 0 && objectArray[0] != null) {
+            return Arrays.asList(objectArray).toArray(new String[objectArray.length]);
+        } else {
+            return null;
+        }
+    }
+
+    public String[] getAreas(String department) {
+        Object[] objectArray = em.createNamedQuery("Location.findAreas")
+                .setParameter("department", department)
+                .getResultList().toArray();
+        if (objectArray.length != 0 && objectArray[0] != null) {
+            return Arrays.asList(objectArray).toArray(new String[objectArray.length]);
+        } else {
+            return null;
+        }
+    }
 }

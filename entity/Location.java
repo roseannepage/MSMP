@@ -8,6 +8,7 @@ package entity;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,6 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "location")
 @XmlRootElement
+@Cacheable(false)
 @NamedQueries({
     @NamedQuery(name = "Location.findAll", query = "SELECT l FROM Location l")
     , @NamedQuery(name = "Location.findByLocationId", query = "SELECT l FROM Location l WHERE l.locationId = :locationId")
@@ -39,7 +41,13 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Location.findByCity", query = "SELECT l FROM Location l WHERE l.city = :city")
     , @NamedQuery(name = "Location.findBySite", query = "SELECT l FROM Location l WHERE l.site = :site")
     , @NamedQuery(name = "Location.findByDepartment", query = "SELECT l FROM Location l WHERE l.department = :department")
-    , @NamedQuery(name = "Location.findBySpecialRequirement", query = "SELECT l FROM Location l WHERE l.specialRequirement = :specialRequirement")})
+    , @NamedQuery(name = "Location.findByArea", query = "SELECT l FROM Location l WHERE l.area = :area")
+    , @NamedQuery(name = "Location.findProvinces", query = "SELECT DISTINCT l.province FROM Location l")
+    , @NamedQuery(name = "Location.findCities", query = "SELECT DISTINCT l.city FROM Location l WHERE l.province = :province")
+    , @NamedQuery(name = "Location.findSites", query = "SELECT DISTINCT l.site FROM Location l WHERE l.city = :city")
+    , @NamedQuery(name = "Location.findDepartments", query = "SELECT DISTINCT l.department FROM Location l WHERE l.site = :site")
+    , @NamedQuery(name = "Location.findAreas", query = "SELECT DISTINCT l.area FROM Location l WHERE l.department = :department")
+})
 public class Location implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,7 +63,7 @@ public class Location implements Serializable {
     private String country;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 30)
     @Column(name = "province")
     private String province;
     @Basic(optional = false)
@@ -71,10 +79,9 @@ public class Location implements Serializable {
     @Size(max = 40)
     @Column(name = "department")
     private String department;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "special_requirement")
-    private boolean specialRequirement;
+    @Size(max = 40)
+    @Column(name = "area")
+    private String area;
     @ManyToMany(mappedBy = "locationCollection")
     private Collection<Scribe> scribeCollection;
     @ManyToMany(mappedBy = "locationCollection1")
@@ -95,13 +102,12 @@ public class Location implements Serializable {
         this.locationId = locationId;
     }
 
-    public Location(Integer locationId, String country, String province, String city, String site, boolean specialRequirement) {
+    public Location(Integer locationId, String country, String province, String city, String site) {
         this.locationId = locationId;
         this.country = country;
         this.province = province;
         this.city = city;
         this.site = site;
-        this.specialRequirement = specialRequirement;
     }
 
     public Integer getLocationId() {
@@ -152,12 +158,12 @@ public class Location implements Serializable {
         this.department = department;
     }
 
-    public boolean getSpecialRequirement() {
-        return specialRequirement;
+    public String getArea() {
+        return area;
     }
 
-    public void setSpecialRequirement(boolean specialRequirement) {
-        this.specialRequirement = specialRequirement;
+    public void setArea(String area) {
+        this.area = area;
     }
 
     @XmlTransient

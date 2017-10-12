@@ -58,8 +58,10 @@ public class Availability implements Serializable {
     @NotNull
     @Column(name = "finish_hour")
     private int finishHour;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "overnight")
-    private Boolean overnight;
+    private boolean overnight;
     @JoinColumn(name = "scribe_id", referencedColumnName = "scribe_id")
     @ManyToOne(optional = false)
     private Scribe scribeId;
@@ -71,11 +73,12 @@ public class Availability implements Serializable {
         this.availabilityId = availabilityId;
     }
 
-    public Availability(Integer availabilityId, Date availableDate, int startHour, int finishHour) {
+    public Availability(Integer availabilityId, Date availableDate, int startHour, int finishHour, boolean overnight) {
         this.availabilityId = availabilityId;
         this.availableDate = availableDate;
         this.startHour = startHour;
         this.finishHour = finishHour;
+        this.overnight = overnight;
     }
 
     public Integer getAvailabilityId() {
@@ -110,11 +113,11 @@ public class Availability implements Serializable {
         this.finishHour = finishHour;
     }
 
-    public Boolean getOvernight() {
+    public boolean getOvernight() {
         return overnight;
     }
 
-    public void setOvernight(Boolean overnight) {
+    public void setOvernight(boolean overnight) {
         this.overnight = overnight;
     }
 
