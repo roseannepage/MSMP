@@ -23,7 +23,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author Marie
+ * @author Jianing (Marie) Zhang
  */
 @Stateless
 @Path("entity.location")

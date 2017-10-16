@@ -6,33 +6,22 @@
 package controller;
 
 import entity.Location;
-import entity.Scribe;
-import entity.Shiftschedule;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.AjaxBehaviorEvent;
-import javax.faces.event.ValueChangeEvent;
 import service.LocationFacadeREST;
-import service.ScribeFacadeREST;
-import service.ShiftscheduleFacadeREST;
 
 /**
  *
- * @author Marie
+ * @author Jianing (Marie) Zhang
  */
-@ManagedBean(name = "Scheduler")
+@ManagedBean(name = "LocationController")
 @ViewScoped
-public class Scheduler {
+public class LocationController {
 
     // EJB
-    @EJB
-    private ScribeFacadeREST ejbScribe;
-    @EJB
-    private ShiftscheduleFacadeREST ejbShiftSchedule;
     @EJB
     private LocationFacadeREST ejbLocation;
     
@@ -102,20 +91,12 @@ public class Scheduler {
         return newLocation;
     }
 
-    // others
-    private List<Scribe> scribes;
-    private int availableScribes;
-    private List<Shiftschedule> requests;
-
-    public Scheduler() {
+    public LocationController() {
         this.newLocation = new Location();
-        requests = new ArrayList<>();
-    }
-
-    public String schedule() {
-        requests = ejbShiftSchedule.findAll();
-        scribes = ejbScribe.findQualifiedScribe();
-        return "test";
+    }   
+    
+    public String getLocationPage(){
+        return "location";
     }
 
     public void provinceSelectListener(AjaxBehaviorEvent event) {
@@ -145,14 +126,6 @@ public class Scheduler {
     public void resetNewLocation(){
         newLocation = new Location();
         clear();
-    }
-
-    private void getScheduleRequest() {
-
-    }
-
-    public int getAvailableScribes() {
-        return availableScribes;
     }
     
     // helper
