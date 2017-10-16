@@ -4,12 +4,13 @@
    To change this template file, choose Tools | Templates
    and open the template in the editor.
    -->
-<!--
-Author: Natalia Gurevich, Jianing (Marie) Zhang (use PrimeFaces library and integration)
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+   xmlns:f="http://java.sun.com/jsf/core"
+   xmlns:jsf="http://xmlns.jcp.org/jsf"
    xmlns:h="http://xmlns.jcp.org/jsf/html"
+   xmlns:t="http://xmlns.jcp.org/jsf/passthrough"
    xmlns:p="http://primefaces.org/ui"
    >
    <h:head>
@@ -19,7 +20,7 @@ Author: Natalia Gurevich, Jianing (Marie) Zhang (use PrimeFaces library and inte
       <h:form>
          <p:growl id="messages" showDetail="true" />
          <h:panelGrid columnClasses="value">
-            <h3 style="margin-top: 0">Schedule</h3>
+            <h3 style="margin-top: 0">Editable Schedule</h3>
             <p:schedule id="schedule" value="#{scheduleController.eventModel}" widgetVar="myschedule" timeZone="GMT+2">
                <p:ajax event="dateSelect" listener="#{scheduleController.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
                <p:ajax event="eventSelect" listener="#{scheduleController.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show();" />

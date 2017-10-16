@@ -4,12 +4,14 @@
    To change this template file, choose Tools | Templates
    and open the template in the editor.
    -->
+   
+<!--
+Author: Behnaz Behmanesh, Jianing (Marie) Zhang (only JSF and integration)
+-->
 <html xmlns="http://www.w3.org/1999/xhtml"
-   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
    xmlns:f="http://java.sun.com/jsf/core"
-   xmlns:jsf="http://xmlns.jcp.org/jsf"
    xmlns:h="http://xmlns.jcp.org/jsf/html"
-   xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+   xmlns:p="http://primefaces.org/ui"
    >
    <h:head>
       <meta charset="utf-8"/>
@@ -154,42 +156,38 @@
                               <h:form role="form">
                                  <div class="form-group">
                                     <label>Province</label>
-                                    <h:selectOneMenu value="#{Scheduler.newLocation.province}">
-                                        <f:selectItem itemLabel="Add New"/>                                      
-                                        <f:selectItems id="provinceList" value="#{Scheduler.provinces}" var="l" itemLabel="#{provinces}" itemValue="#{provinces}" />
-                                        <f:ajax listener="#{Scheduler.provinceSelectListener}" event="change" render="city"/>
-                                    </h:selectOneMenu>
+                                    
+                                    <p:selectOneMenu value="#{LocationController.newLocation.province}" editable="true">                                    
+                                        <f:selectItems id="provinceList" value="#{LocationController.provinces}" var="l" itemLabel="#{provinces}" itemValue="#{provinces}" />
+                                        <f:ajax listener="#{LocationController.provinceSelectListener}" event="change" render="city"/>
+                                    </p:selectOneMenu>
                                  </div>
                                  <div class="form-group">
                                     <label>City</label>
-                                    <h:selectOneMenu id="city" value="#{Scheduler.newLocation.city}">
-                                        <f:selectItem itemLabel="Add New"/>  
-                                        <f:selectItems value="#{Scheduler.cities}" var="l" itemLabel="#{cities}" itemValue="#{cities}" />
-                                        <f:ajax listener="#{Scheduler.citySelectListener}" event="change" render="site"/>
-                                    </h:selectOneMenu>
+                                    <p:selectOneMenu id="city" value="#{LocationController.newLocation.city}" editable="true">
+                                        <f:selectItems value="#{LocationController.cities}" var="l" itemLabel="#{cities}" itemValue="#{cities}" />
+                                        <f:ajax listener="#{LocationController.citySelectListener}" event="change" render="site"/>
+                                    </p:selectOneMenu>
                                  </div>
                                  <div class="form-group">
                                     <label>Site</label>
-                                    <h:selectOneMenu id="site" value="#{Scheduler.newLocation.site}">
-                                        <f:selectItem itemLabel="Add New"/>  
-                                        <f:selectItems value="#{Scheduler.sites}" var="l" itemLabel="#{sites}" itemValue="#{sites}" />
-                                        <f:ajax listener="#{Scheduler.siteSelectListener}" event="change" render="department"/>
-                                    </h:selectOneMenu>
+                                    <p:selectOneMenu id="site" value="#{LocationController.newLocation.site}" editable="true">
+                                        <f:selectItems value="#{LocationController.sites}" var="l" itemLabel="#{sites}" itemValue="#{sites}" />
+                                        <f:ajax listener="#{LocationController.siteSelectListener}" event="change" render="department"/>
+                                    </p:selectOneMenu>
                                  </div>
                                  <div class="form-group">
                                     <label>Department</label>
-                                    <h:selectOneMenu id="department" value="#{Scheduler.newLocation.department}">
-                                        <f:selectItem itemLabel="Add New"/>  
-                                        <f:selectItems value="#{Scheduler.departments}" var="l" itemLabel="#{departments}" itemValue="#{departments}" />
-                                        <f:ajax listener="#{Scheduler.departmentSelectListener}" event="change" render="area"/>
-                                    </h:selectOneMenu>
+                                    <p:selectOneMenu id="department" value="#{LocationController.newLocation.department}" editable="true">
+                                        <f:selectItems value="#{LocationController.departments}" var="l" itemLabel="#{departments}" itemValue="#{departments}" />
+                                        <f:ajax listener="#{LocationController.departmentSelectListener}" event="change" render="area"/>
+                                    </p:selectOneMenu>
                                  </div>
                                  <div class="form-group">
                                     <label>Area</label>
-                                    <h:selectOneMenu id="area" value="#{Scheduler.newLocation.area}">
-                                        <f:selectItem itemLabel="Add New"/>  
-                                        <f:selectItems value="#{Scheduler.areas}" var="l" itemLabel="#{areas}" itemValue="#{areas}" />
-                                    </h:selectOneMenu>
+                                    <p:selectOneMenu id="area" value="#{LocationController.newLocation.area}" editable="true">
+                                        <f:selectItems value="#{LocationController.areas}" var="l" itemLabel="#{areas}" itemValue="#{areas}" />
+                                    </p:selectOneMenu>
                                     <!-- <div class="form-group">
                                        <label>City</label>
                                        <input class="form-control">
@@ -269,9 +267,11 @@
                                        </label>
                                        </div> -->
                                     <p><br/></p>
-                                    <h:commandButton value="Submit" type="submit" class="btn btn-default" action="#{Scheduler.addNewLocation}"/>
+                                    <h:commandButton value="Submit" type="submit" class="btn btn-default" action="#{Scheduler.addNewLocation}">
+                                        <f:ajax event="change" render="province city site department area"/>
+                                    </h:commandButton>
                                     <h:commandButton value="Reset" type="reset" class="btn btn-default" action="#{Scheduler.resetNewLocation}">
-                                        <f:ajax listener="#{Scheduler.provinceSelectListener}" event="change" render="province city site department area"/>
+                                        <f:ajax event="change" render="province city site department area"/>
                                     </h:commandButton>
                                  </div>
                               </h:form>
