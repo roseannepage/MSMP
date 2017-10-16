@@ -5,21 +5,21 @@ DROP DATABASE IF EXISTS MSM;
 CREATE DATABASE MSM;
 USE MSM;
 
-DROP TABLE IF EXISTS ActiveLocation;#
-DROP TABLE IF EXISTS HistoryLocation;#
-DROP TABLE IF EXISTS MdLocation;#
-DROP TABLE IF EXISTS LocTraining;#
-DROP TABLE IF EXISTS MdSpecializaiton;#
+DROP TABLE IF EXISTS Scribe;
+DROP TABLE IF EXISTS Location;
+DROP TABLE IF EXISTS ActiveLocation;
+DROP TABLE IF EXISTS HistoryLocation;
+DROP TABLE IF EXISTS Physician;
+DROP TABLE IF EXISTS MdLocation;
+DROP TABLE IF EXISTS LocTraining;
+DROP TABLE IF EXISTS Specialization;
+DROP TABLE IF EXISTS MdSpecializaiton;
 DROP TABLE IF EXISTS ScribeSpecializaiton;
 DROP TABLE IF EXISTS Preference;
+DROP TABLE IF EXISTS Shift;
 DROP TABLE IF EXISTS ShiftSchedule;
 DROP TABLE IF EXISTS Availability;
-DROP TABLE IF EXISTS MentorMentee; #
-DROP TABLE IF EXISTS Scribe; 
-DROP TABLE IF EXISTS Location;
-DROP TABLE IF EXISTS Physician;
-DROP TABLE IF EXISTS Specialization;
-DROP TABLE IF EXISTS Shift;
+DROP TABLE IF EXISTS MentorMentee;
 
 
 CREATE TABLE Scribe
@@ -47,18 +47,16 @@ CONSTRAINT pk_scribe PRIMARY KEY (scribe_id));
 CREATE TABLE Location
 ( location_id int NOT NULL AUTO_INCREMENT,
  country	VARCHAR(20) NOT NULL, 
- province 	VARCHAR(30) NOT NULL,
+ province 	VARCHAR(20) NOT NULL,
  city  		VARCHAR(20) NOT NULL,
  site  		VARCHAR(60) NOT NULL,
  department	VARCHAR(40) NULL,
- area		VARCHAR(40) NULL,
+ special_requirement BIT(1) NOT NULL,
 CONSTRAINT pk_location PRIMARY KEY (location_id));
 
 CREATE TABLE ActiveLocation
-(#active_location_id int NOT NULL AUTO_INCREMENT,
-location_id int NOT NULL,
+(location_id int NOT NULL,
  scribe_id int NOT NULL,
-  #PRIMARY KEY (active_location_id),
  PRIMARY KEY (location_id, scribe_id),
  FOREIGN KEY (scribe_id) REFERENCES Scribe(scribe_id),
  FOREIGN KEY (location_id) REFERENCES Location(location_id)
@@ -170,7 +168,7 @@ scribe_id INT NOT NULL,
 available_date DATE NOT NULL,
 start_hour INT NOT NULL,
 finish_hour INT NOT NULL,
-overnight BIT(1) NOT NULL,
+overnight BIT(1) NULL,
 PRIMARY KEY(availability_id),
 FOREIGN KEY (scribe_id) REFERENCES Scribe(scribe_id)
 );
