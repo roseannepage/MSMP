@@ -19,17 +19,13 @@ Author: Behnaz Behmanesh, Jianing (Marie) Zhang (only JSF and integration)
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
       <meta name="description" content=""/>
       <meta name="author" content=""/>
-      <title>MSC Admin Page</title>
-      <!-- Bootstrap Core CSS -->
-      <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-      <!-- MetisMenu CSS -->
-      <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet"/>
-      <!-- Custom CSS -->
-      <link href="../dist/css/sb-admin-2.css" rel="stylesheet"/>
-      <!-- Custom Fonts -->
-      <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-      <!-- My Custom CSS -->
-      <link href="../vendor/bootstrap/css/custom.css" rel="stylesheet"/>
+      
+      <title>MSC Add Location Page</title>
+      <link href="bootstrap.min.css" rel="stylesheet"/>
+      <link href="metisMenu.min.css" rel="stylesheet"/>
+      <link href="sb-admin-2.css" rel="stylesheet"/>
+      <link href="font-awesome.min.css" rel="stylesheet" type="text/css"/>
+      <link href="custom.css" rel="stylesheet"/>
    </h:head>
    <body>
       <div id="wrapper">
@@ -42,7 +38,7 @@ Author: Behnaz Behmanesh, Jianing (Marie) Zhang (only JSF and integration)
                <span class="icon-bar"></span>
                <span class="icon-bar"></span>
                </button>
-               <a class="navbar-brand" href="index.xhtml">MSC Admin Page</a>
+               <a class="navbar-brand" href="index.xhtml">MSC Add Location Page</a>
             </div>
             <!-- /.navbar-header -->
             <ul class="nav navbar-top-links navbar-right">
@@ -188,89 +184,14 @@ Author: Behnaz Behmanesh, Jianing (Marie) Zhang (only JSF and integration)
                                     <p:selectOneMenu id="area" value="#{LocationController.newLocation.area}" editable="true">
                                         <f:selectItems value="#{LocationController.areas}" var="l" itemLabel="#{areas}" itemValue="#{areas}" />
                                     </p:selectOneMenu>
-                                    <!-- <div class="form-group">
-                                       <label>City</label>
-                                       <input class="form-control">
-                                       <p class="help-block">Enter name of the City here.</p>
-                                       </div>
-                                       
-                                       <div class="form-group">
-                                       <label>Text Input with Placeholder</label>
-                                       <input class="form-control" placeholder="Enter text">
-                                       </div> -->
-                                    <!-- <div class="form-group">
-                                       <label>File input</label>
-                                       <input type="file">
-                                       </div> -->
-                                    <!-- <div class="form-group">
-                                       <label>Text area</label>
-                                       <textarea class="form-control" rows="3"></textarea>
-                                       </div> -->
-                                    <!-- <div class="form-group">
-                                       <label>Checkboxes</label>
-                                       <div class="checkbox">
-                                           <label>
-                                               <input type="checkbox" value="">Checkbox 1
-                                           </label>
-                                       </div>
-                                       <div class="checkbox">
-                                           <label>
-                                               <input type="checkbox" value="">Checkbox 2
-                                           </label>
-                                       </div>
-                                       <div class="checkbox">
-                                           <label>
-                                               <input type="checkbox" value="">Checkbox 3
-                                           </label>
-                                       </div>
-                                       </div> -->
-                                    <!-- <div class="form-group">
-                                       <label>Inline Checkboxes</label>
-                                       <label class="checkbox-inline">
-                                           <input type="checkbox">1
-                                       </label>
-                                       <label class="checkbox-inline">
-                                           <input type="checkbox">2
-                                       </label>
-                                       <label class="checkbox-inline">
-                                           <input type="checkbox">3
-                                       </label>
-                                       </div> -->
-                                    <!-- <div class="form-group">
-                                       <label>Radio Buttons</label>
-                                       <div class="radio">
-                                           <label>
-                                               <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>Radio 1
-                                           </label>
-                                       </div>
-                                       <div class="radio">
-                                           <label>
-                                               <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Radio 2
-                                           </label>
-                                       </div>
-                                       <div class="radio">
-                                           <label>
-                                               <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">Radio 3
-                                           </label>
-                                       </div>
-                                       </div> -->
-                                    <!-- <div class="form-group">
-                                       <label>Inline Radio Buttons</label>
-                                       <label class="radio-inline">
-                                           <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" checked>1
-                                       </label>
-                                       <label class="radio-inline">
-                                           <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">2
-                                       </label>
-                                       <label class="radio-inline">
-                                           <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">3
-                                       </label>
-                                       </div> -->
+                                    
+                                    
+                                    
                                     <p><br/></p>
-                                    <h:commandButton value="Submit" type="submit" class="btn btn-default" action="#{Scheduler.addNewLocation}">
+                                    <h:commandButton value="Submit" type="submit" class="btn btn-default" action="#{LocationController.addNewLocation}">
                                         <f:ajax event="change" render="province city site department area"/>
                                     </h:commandButton>
-                                    <h:commandButton value="Reset" type="reset" class="btn btn-default" action="#{Scheduler.resetNewLocation}">
+                                    <h:commandButton value="Reset" type="reset" class="btn btn-default" action="#{LocationController.resetNewLocation}">
                                         <f:ajax event="change" render="province city site department area"/>
                                     </h:commandButton>
                                  </div>
@@ -359,12 +280,12 @@ Author: Behnaz Behmanesh, Jianing (Marie) Zhang (only JSF and integration)
       </div>
       <!-- /#wrapper -->
       <!-- jQuery -->
-      <script src="../vendor/jquery/jquery.min.js"></script>
+      <script src="JS/jquery.min.js"></script>
       <!-- Bootstrap Core JavaScript -->
-      <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+      <script src="JS/bootstrap.min.js"></script>
       <!-- Metis Menu Plugin JavaScript -->
-      <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+      <script src="JS/metisMenu.min.js"></script>
       <!-- Custom Theme JavaScript -->
-      <script src="../dist/js/sb-admin-2.js"></script>
+      <script src="JS/sb-admin-2.js"></script>
    </body>
 </html>
