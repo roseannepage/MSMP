@@ -4,12 +4,14 @@
    To change this template file, choose Tools | Templates
    and open the template in the editor.
    -->
+   
+<!--
+Author: Behnaz Behmanesh, Jianing (Marie) Zhang (only JSF and integration)
+-->
 <html xmlns="http://www.w3.org/1999/xhtml"
-   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
    xmlns:f="http://java.sun.com/jsf/core"
-   xmlns:jsf="http://xmlns.jcp.org/jsf"
    xmlns:h="http://xmlns.jcp.org/jsf/html"
-   xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+   xmlns:p="http://primefaces.org/ui"
    >
    <h:head>
       <meta charset="utf-8"/>
@@ -17,17 +19,13 @@
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
       <meta name="description" content=""/>
       <meta name="author" content=""/>
-      <title>MSC Admin Page</title>
-      <!-- Bootstrap Core CSS -->
-      <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-      <!-- MetisMenu CSS -->
-      <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet"/>
-      <!-- Custom CSS -->
-      <link href="../dist/css/sb-admin-2.css" rel="stylesheet"/>
-      <!-- Custom Fonts -->
-      <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-      <!-- My Custom CSS -->
-      <link href="../vendor/bootstrap/css/custom.css" rel="stylesheet"/>
+      
+      <title>MSC Add Location Page</title>
+      <link href="bootstrap.min.css" rel="stylesheet"/>
+      <link href="metisMenu.min.css" rel="stylesheet"/>
+      <link href="sb-admin-2.css" rel="stylesheet"/>
+      <link href="font-awesome.min.css" rel="stylesheet" type="text/css"/>
+      <link href="custom.css" rel="stylesheet"/>
    </h:head>
    <body>
       <div id="wrapper">
@@ -40,7 +38,7 @@
                <span class="icon-bar"></span>
                <span class="icon-bar"></span>
                </button>
-               <a class="navbar-brand" href="index.html">MSC Admin Page</a>
+               <a class="navbar-brand" href="index.xhtml">MSC Add Location Page</a>
             </div>
             <!-- /.navbar-header -->
             <ul class="nav navbar-top-links navbar-right">
@@ -103,7 +101,7 @@
                      <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                      </li>
                      <li class="divider"></li>
-                     <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                     <li><a href="login.xhtml"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                      </li>
                   </ul>
                   <!-- /.dropdown-user -->
@@ -126,7 +124,7 @@
                         <!-- /input-group -->
                      </li>
                      <li>
-                        <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        <a href="index.xhtml"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                      </li>
                   </ul>
                </div>
@@ -154,124 +152,47 @@
                               <h:form role="form">
                                  <div class="form-group">
                                     <label>Province</label>
-                                    <h:selectOneMenu value="#{Scheduler.newLocation.province}">
-                                        <f:selectItem itemLabel="Add New"/>                                      
-                                        <f:selectItems id="provinceList" value="#{Scheduler.provinces}" var="l" itemLabel="#{provinces}" itemValue="#{provinces}" />
-                                        <f:ajax listener="#{Scheduler.provinceSelectListener}" event="change" render="city"/>
-                                    </h:selectOneMenu>
+                                    
+                                    <p:selectOneMenu value="#{LocationController.newLocation.province}" editable="true">                                    
+                                        <f:selectItems id="provinceList" value="#{LocationController.provinces}" var="l" itemLabel="#{provinces}" itemValue="#{provinces}" />
+                                        <f:ajax listener="#{LocationController.provinceSelectListener}" event="change" render="city"/>
+                                    </p:selectOneMenu>
                                  </div>
                                  <div class="form-group">
                                     <label>City</label>
-                                    <h:selectOneMenu id="city" value="#{Scheduler.newLocation.city}">
-                                        <f:selectItem itemLabel="Add New"/>  
-                                        <f:selectItems value="#{Scheduler.cities}" var="l" itemLabel="#{cities}" itemValue="#{cities}" />
-                                        <f:ajax listener="#{Scheduler.citySelectListener}" event="change" render="site"/>
-                                    </h:selectOneMenu>
+                                    <p:selectOneMenu id="city" value="#{LocationController.newLocation.city}" editable="true">
+                                        <f:selectItems value="#{LocationController.cities}" var="l" itemLabel="#{cities}" itemValue="#{cities}" />
+                                        <f:ajax listener="#{LocationController.citySelectListener}" event="change" render="site"/>
+                                    </p:selectOneMenu>
                                  </div>
                                  <div class="form-group">
                                     <label>Site</label>
-                                    <h:selectOneMenu id="site" value="#{Scheduler.newLocation.site}">
-                                        <f:selectItem itemLabel="Add New"/>  
-                                        <f:selectItems value="#{Scheduler.sites}" var="l" itemLabel="#{sites}" itemValue="#{sites}" />
-                                        <f:ajax listener="#{Scheduler.siteSelectListener}" event="change" render="department"/>
-                                    </h:selectOneMenu>
+                                    <p:selectOneMenu id="site" value="#{LocationController.newLocation.site}" editable="true">
+                                        <f:selectItems value="#{LocationController.sites}" var="l" itemLabel="#{sites}" itemValue="#{sites}" />
+                                        <f:ajax listener="#{LocationController.siteSelectListener}" event="change" render="department"/>
+                                    </p:selectOneMenu>
                                  </div>
                                  <div class="form-group">
                                     <label>Department</label>
-                                    <h:selectOneMenu id="department" value="#{Scheduler.newLocation.department}">
-                                        <f:selectItem itemLabel="Add New"/>  
-                                        <f:selectItems value="#{Scheduler.departments}" var="l" itemLabel="#{departments}" itemValue="#{departments}" />
-                                        <f:ajax listener="#{Scheduler.departmentSelectListener}" event="change" render="area"/>
-                                    </h:selectOneMenu>
+                                    <p:selectOneMenu id="department" value="#{LocationController.newLocation.department}" editable="true">
+                                        <f:selectItems value="#{LocationController.departments}" var="l" itemLabel="#{departments}" itemValue="#{departments}" />
+                                        <f:ajax listener="#{LocationController.departmentSelectListener}" event="change" render="area"/>
+                                    </p:selectOneMenu>
                                  </div>
                                  <div class="form-group">
                                     <label>Area</label>
-                                    <h:selectOneMenu id="area" value="#{Scheduler.newLocation.area}">
-                                        <f:selectItem itemLabel="Add New"/>  
-                                        <f:selectItems value="#{Scheduler.areas}" var="l" itemLabel="#{areas}" itemValue="#{areas}" />
-                                    </h:selectOneMenu>
-                                    <!-- <div class="form-group">
-                                       <label>City</label>
-                                       <input class="form-control">
-                                       <p class="help-block">Enter name of the City here.</p>
-                                       </div>
-                                       
-                                       <div class="form-group">
-                                       <label>Text Input with Placeholder</label>
-                                       <input class="form-control" placeholder="Enter text">
-                                       </div> -->
-                                    <!-- <div class="form-group">
-                                       <label>File input</label>
-                                       <input type="file">
-                                       </div> -->
-                                    <!-- <div class="form-group">
-                                       <label>Text area</label>
-                                       <textarea class="form-control" rows="3"></textarea>
-                                       </div> -->
-                                    <!-- <div class="form-group">
-                                       <label>Checkboxes</label>
-                                       <div class="checkbox">
-                                           <label>
-                                               <input type="checkbox" value="">Checkbox 1
-                                           </label>
-                                       </div>
-                                       <div class="checkbox">
-                                           <label>
-                                               <input type="checkbox" value="">Checkbox 2
-                                           </label>
-                                       </div>
-                                       <div class="checkbox">
-                                           <label>
-                                               <input type="checkbox" value="">Checkbox 3
-                                           </label>
-                                       </div>
-                                       </div> -->
-                                    <!-- <div class="form-group">
-                                       <label>Inline Checkboxes</label>
-                                       <label class="checkbox-inline">
-                                           <input type="checkbox">1
-                                       </label>
-                                       <label class="checkbox-inline">
-                                           <input type="checkbox">2
-                                       </label>
-                                       <label class="checkbox-inline">
-                                           <input type="checkbox">3
-                                       </label>
-                                       </div> -->
-                                    <!-- <div class="form-group">
-                                       <label>Radio Buttons</label>
-                                       <div class="radio">
-                                           <label>
-                                               <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>Radio 1
-                                           </label>
-                                       </div>
-                                       <div class="radio">
-                                           <label>
-                                               <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Radio 2
-                                           </label>
-                                       </div>
-                                       <div class="radio">
-                                           <label>
-                                               <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">Radio 3
-                                           </label>
-                                       </div>
-                                       </div> -->
-                                    <!-- <div class="form-group">
-                                       <label>Inline Radio Buttons</label>
-                                       <label class="radio-inline">
-                                           <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" checked>1
-                                       </label>
-                                       <label class="radio-inline">
-                                           <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">2
-                                       </label>
-                                       <label class="radio-inline">
-                                           <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">3
-                                       </label>
-                                       </div> -->
+                                    <p:selectOneMenu id="area" value="#{LocationController.newLocation.area}" editable="true">
+                                        <f:selectItems value="#{LocationController.areas}" var="l" itemLabel="#{areas}" itemValue="#{areas}" />
+                                    </p:selectOneMenu>
+                                    
+                                    
+                                    
                                     <p><br/></p>
-                                    <h:commandButton value="Submit" type="submit" class="btn btn-default" action="#{Scheduler.addNewLocation}"/>
-                                    <h:commandButton value="Reset" type="reset" class="btn btn-default" action="#{Scheduler.resetNewLocation}">
-                                        <f:ajax listener="#{Scheduler.provinceSelectListener}" event="change" render="province city site department area"/>
+                                    <h:commandButton value="Submit" type="submit" class="btn btn-default" action="#{LocationController.addNewLocation}">
+                                        <f:ajax event="change" render="province city site department area"/>
+                                    </h:commandButton>
+                                    <h:commandButton value="Reset" type="reset" class="btn btn-default" action="#{LocationController.resetNewLocation}">
+                                        <f:ajax event="change" render="province city site department area"/>
                                     </h:commandButton>
                                  </div>
                               </h:form>
@@ -359,12 +280,12 @@
       </div>
       <!-- /#wrapper -->
       <!-- jQuery -->
-      <script src="../vendor/jquery/jquery.min.js"></script>
+      <script src="JS/jquery.min.js"></script>
       <!-- Bootstrap Core JavaScript -->
-      <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+      <script src="JS/bootstrap.min.js"></script>
       <!-- Metis Menu Plugin JavaScript -->
-      <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+      <script src="JS/metisMenu.min.js"></script>
       <!-- Custom Theme JavaScript -->
-      <script src="../dist/js/sb-admin-2.js"></script>
+      <script src="JS/sb-admin-2.js"></script>
    </body>
 </html>
