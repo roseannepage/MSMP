@@ -31,111 +31,27 @@
                 </button>
                 <a class="navbar-brand" href="index.xhtml">MSC Admin Page</a>
                 <img src="Logo.PNG" alt="Logo" width="50" height="50"></img>
-            </div>
-            <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <strong>John Smith</strong>
-                                    <span class="pull-right text-muted">
-                                        <em>Yesterday</em>
-                                    </span>
-                                </div>
-                                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>Read All Messages</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a></li>
-                        <li class="divider"></li>
-                        <li><a href="login.xhtml"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
-                    </ul>
-                </li>                
-            </ul>
-        
+            </div>      
         </nav>
-            
-        
-        
         <h:form>            
             <h:panelGrid columnClasses="value">
                 <h3 style="margin-top: 0">Dashboard</h3>
-                    <h:commandButton action="#{LocationController.getLocationPage}" value="LocationPage"/>
+                    <h:outputText value="&#160;" />
+                    <a href="login.xhtml"><b><font color="white">&nbsp;&nbsp;&nbsp;Logout</font></b></a>
                     <br></br>
                     <br></br>
-                    <h:commandButton action="#{scheduleController.getSchedulePage}" value="SchedulePage"/>
-            </h:panelGrid>
-            
-            <br></br>
-            <br></br>
-            <a href="login.xhtml"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-            <br></br>
-            <br></br>
-            <a href="schedule.xhtml"><i class="fa fa-dashboard fa-fw"></i>Edit Profile</a>
-            <br></br>
-            <br></br>
-            <a href="schedule.xhtml"><i class="fa fa-dashboard fa-fw"></i>Edit Availability</a>
-            <br></br>
-            <br></br>
-            <a href="schedule.xhtml"><i class="fa fa-dashboard fa-fw"></i>My Schedule</a>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <h:commandButton action="#{scheduleController.getSchedulePage}" value="Schedule"/>
-            <br></br>
-            <br></br>
-            <h:commandButton action="#{scheduleController.getSchedulePage}" value="Change Schedule"/>
-            <br></br>
-            <br></br>
-            <h:commandButton action="#{scheduleController.getSchedulePage}" value="All Schedule"/>
-            <br></br>
-            <br></br>
-            <h:commandButton action="#{LocationController.getLocationPage}" value="Add Location"/>
-            <br></br>
-            <br></br>
-            <h:commandButton action="#{scheduleController.schedule}" value="Test"/>
+                    <a href="schedule.xhtml"><b><font color="white">&nbsp;&nbsp;&nbsp;Edit Profile</font></b></a>
+                    <h:outputText value="&#160;" />
+                    <a href="schedule.xhtml"><b><font color="white">&nbsp;&nbsp;&nbsp;Edit Availability</font></b></a>
+                    <h:outputText value="&#160;" />
+                    <h:commandButton action="#{scheduleController.getSchedulePage}" value="Make Schedule"/>
+                    <h:outputText value="&#160;" />
+                    <h:commandButton action="#{scheduleController.getSchedulePage}" value="All Schedule"/>
+                    <h:outputText value="&#160;" />
+                    <h:commandButton action="#{scheduleController.getSchedulePage}" value="My Schedule"/>
+                    <h:outputText value="&#160;" />
+                    <h:commandButton action="#{LocationController.getLocationPage}" value="Add Location"/>
+                    </h:panelGrid>
         </h:form>
         
             
